@@ -1,4 +1,6 @@
 <!doctype html>
+<html lang="en">
+<head>
 <style>
 html,body{height:100%;}
 .carousel,.item,.active{height:100%;}
@@ -23,6 +25,11 @@ html,body{height:100%;}
 </style>
 <title>SlideDecker</title>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+<script src="{{ url_for('static', filename='js/slidr/slidr.min.js') }}"></script>
+</head>
+<body>
 <div class="container fill">
   {% block body %}{% endblock %}
 </div>
+</body>
+</html>
