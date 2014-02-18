@@ -6,6 +6,8 @@ SlideDecker
 Presentations for web browsers
 """
 
+__version__ = '0.1'
+
 from flask import Flask, render_template
 
 
