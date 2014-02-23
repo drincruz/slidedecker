@@ -3,8 +3,11 @@
 <div id="myCarousel" class="carousel slide">
   <div class="carousel-inner">
     <div id="slidr-deck" class="item">
-      <div class="fill" style="background-color: #2aca76;" data-slidr="one">one</div>
+      <div class="fill" style="background-color: #2aca76;" data-slidr="one">
+        <h1>one</h1>
+      </div>
       <div class="fill" style="background-color: #69bfe9;" data-slidr="two">two</div>
+      <div class="fill" style="background-image: url(http://thecatapi.com/api/images/get?format=src&type=gif);"  data-slidr="3"><h3>another slide</h3></div>
     </div>
   </div>
 </div>
@@ -14,7 +17,7 @@
     controls: 'corner',
     fade: false,
     keyboard: true,
-    overflow: true,
+    overflow: false,
     touch: true,
     transition: 'cube',
   }).start();

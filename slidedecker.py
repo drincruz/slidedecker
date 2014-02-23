@@ -20,6 +20,9 @@ app.debug = True
 def slides():
     return render_template("slide.html")
 
+@app.route('/admin')
+def admin():
+    return render_template("admin.html")
 
 if "__main__" == __name__:
     app.run()
