@@ -1,10 +1,9 @@
 from app import db
 from app.slides.models import Slide
-from flask import (Blueprint, Flask, flash, redirect, render_template,
-        url_for)
+from flask import Blueprint, render_template
 
 slides = Blueprint('slides', __name__, url_prefix='/slides')
 
 @slides.route('/')
-def slides():
+def slide_viewer():
     return render_template("slides/slide.html")
