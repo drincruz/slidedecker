@@ -19,6 +19,12 @@ db = SQLAlchemy(app)
 def not_found(error):
     return render_template('404.html'), 404
 
+# Import modules via blueprint
+from app.slides.controllers import slides
+
+# Register blueprints
+app.register_blueprint(slides)
+
 # Build the database:
 # This will create the database file using SQLAlchemy
 db.create_all()

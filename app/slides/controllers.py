@@ -7,4 +7,4 @@ slides = Blueprint('slides', __name__, url_prefix='/slides')
 
 @slides.route('/')
 def slides():
-    return render_template("slide.html")
+    return render_template("slides/slide.html")

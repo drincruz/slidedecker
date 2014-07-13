@@ -44,4 +44,4 @@ class Slide(Base):
         self.text = text
 
     def __repr__(self):
-        return '<Slide %s>
+        return '<Slide %r> % (self.title)'
