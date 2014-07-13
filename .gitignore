@@ -37,3 +37,6 @@ nosetests.xml
 
 # vim
 *.swp
+
+# SQLAlchemy app.db
+app.db
