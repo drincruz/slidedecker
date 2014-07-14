@@ -1,3 +1,8 @@
+"""
+Slide Viewer controllers
+
+"""
+
 from app import db
 from app.slides.models import Slide
 from flask import Blueprint, render_template
