@@ -20,5 +20,13 @@ def add_slide():
     bg_image = request.form['bg-image']
     bg_color = request.form['bg-color']
     text = request.form['text']
+
+    # Save the form data in the Slide object
+    slide = Slide(title, bg_image, bg_color, text)
+
+    # Add the records in the database
+    db.session.add(slide)
+    db.session.commit()
+
     flash('New slide was successfully posted')
     return redirect(url_for('admin.admin_home'))
