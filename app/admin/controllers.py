@@ -56,4 +56,4 @@ def get_slides():
                     'bg_color': slide.bg_color,
                     'text': slide.text,
                 })
-    return jsonify(results=json_ret)
+    return jsonify(slides=json_ret)
