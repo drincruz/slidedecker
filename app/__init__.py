@@ -1,5 +1,5 @@
 # Import flask and template operators
-from flask import Flask, render_template
+from flask import Flask, redirect, render_template, url_for
 
 # Import SQLAlchemy
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -18,6 +18,15 @@ db = SQLAlchemy(app)
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
+
+# Index redirect
+@app.route('/')
+def home():
+    """
+    Redirect to the slide viewer
+
+    """
+    return redirect(url_for('slides.slide_viewer'))
 
 # Import modules for Blueprint
 from app.slides.controllers import slides
