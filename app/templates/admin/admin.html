@@ -5,7 +5,8 @@
 <div class="form-group" ng-app="myApp">
     <div ng-controller="MainCtrl">
         <div ng-repeat="field in slides track by $index">
-            <form action="{{ url_for('admin.add_slide') }}" method="POST" role="form">
+            <form action="{{ url_for('admin.slide_edit') }}" method="POST" role="form">
+                <input type="hidden" name="slide_id" ng-model="slides[$index].id">
                 <label for="fTitle">Title:</label>
                 <input type="text" size="30" name="title" class="form-control"
                     ng-model="slides[$index].title">
