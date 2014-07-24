@@ -94,8 +94,14 @@ def slide_edit():
     Route an add/update to a controller
 
     """
-    print(request.form['slide_id']) # TODO DELETE
-    if request.form['slide_id']:
+    # TODO properly get json post data
+    try:
+        request = request.get_json()
+    except:
+        pass
+    print(request.get_json()) # TODO DELETE
+    print(request.slide_id) # TODO DELETE
+    if request.slide_id:
         return update_slide(request)
     else:
         return add_slide(request)

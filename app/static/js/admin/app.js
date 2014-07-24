@@ -32,4 +32,32 @@ myApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
             console.log("[ERROR] " + data);
         });
     };
+
+    /**
+     * Save a slide
+     *
+     */
+    $scope.saveSlide = function(slide) {
+        var SAVE_SLIDE_ENDPOINT = '/admin/slide/edit';
+        console.log("[DEBUG] getting here?");
+        console.log(slide);
+        $http({
+            method: 'POST',
+            url: SAVE_SLIDE_ENDPOINT,
+            data: JSON.stringify({ 
+                'slide_id': slide.id
+            }),
+            headers: {'Content-Type': 'application/json'}
+            
+        })
+        .success(function(data, status, headers, config) {
+            if (data) {
+                console.log(data);
+                $scope.slides = data.slides;
+            }
+        })
+        .error(function(data, status, headers, config) {
+            console.log("[ERROR] " + data);
+        });
+    };
 }]);
