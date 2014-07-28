@@ -5,7 +5,7 @@
     <div ng-controller="MainCtrl">
         <div ng-repeat="field in slides track by $index">
             <div class="panel panel-default">
-                <div class="panel-heading"></div>
+                <div class="panel-heading">{% raw %}{{ slides[$index].title ? slides[$index].title : 'Slide ' + $index }}{% endraw %} </div>
                 <div class="panel-body">
                     <form action="{{ url_for('admin.slide_edit') }}" method="POST" role="form">
                         <input type="hidden" name="slide_id" ng-model="slides[$index].id">
