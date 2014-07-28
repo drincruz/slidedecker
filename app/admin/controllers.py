@@ -39,15 +39,15 @@ def get_slides():
     return jsonify(slides=json_ret)
 
 @admin.route('/add', methods=['POST'])
-def add_slide(request):
+def add_slide(slide_data):
     """
     Adds a slide to the database
 
     """
-    title = request.form['title']
-    bg_image = request.form['bg-image']
-    bg_color = request.form['bg-color']
-    text = request.form['text']
+    title = slide_data['title']
+    bg_image = slide_data['bg_image']
+    bg_color = slide_data['bg_color']
+    text = slide_data['text']
 
     # Save the form data in the Slide object
     slide = Slide(title, bg_image, bg_color, text)
@@ -60,23 +60,24 @@ def add_slide(request):
     return redirect(url_for('admin.admin_home'))
 
 @admin.route('/update', methods=['POST'])
-def update_slide(request):
+def update_slide(slide_data):
     """
     Update a slide entry
 
     """
-    slide_id = request.form['slide_id']
+    slide_id = slide_data['slide_id']
 
-    title = request.form['title']
-    bg_image = request.form['bg-image']
-    bg_color = request.form['bg-color']
-    text = request.form['text']
+    title = slide_data['title']
+    bg_image = slide_data['bg_image']
+    bg_color = slide_data['bg_color']
+    text = slide_data['text']
 
-    try:
-        slide = Slide.query.get(id==slide_id)
-    except NoResultFound:
-        flash('ERROR: No Slide was found.')
-        return redirect(url_for('admin.admin_home'))
+    slide = db.session.query(Slide).get(slide_id)
+    if slide is None:
+        return jsonify(
+                status='error',
+                message='No slide with id: {} was found'.format(slide_id)
+                )
 
     # Update the record in the database
     slide.title = title
@@ -85,8 +86,10 @@ def update_slide(request):
     slide.text = text
     db.session.commit()
 
-    flash('Slide was successfully updated')
-    return redirect(url_for('admin.admin_home'))
+    return jsonify(
+            status='success',
+            message='Successfully saved slide: {}'.format(slide_id)
+            )
 
 @admin.route('/slide/edit', methods=['POST'])
 def slide_edit():
@@ -94,8 +97,12 @@ def slide_edit():
     Route an add/update to a controller
 
     """
-    print(request.form['slide_id']) # TODO DELETE
-    if request.form['slide_id']:
-        return update_slide(request)
+    try:
+        post = request.get_json()
+    except:
+        return jsonify(error='Expecting a JSON POST')
+        post['slide_id']
+    if 'slide_id' in post:
+        return update_slide(post)
     else:
-        return add_slide(request)
+        return add_slide(post)
