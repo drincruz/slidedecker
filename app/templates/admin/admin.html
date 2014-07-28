@@ -1,12 +1,11 @@
 {% extends "admin/base_admin.html" %}
 {% block body %}
 <script src="{{ url_for('static', filename='js/admin/app.js') }}"></script>
-<h3>Add New Slide</h3>
 <div class="form-group" ng-app="myApp">
     <div ng-controller="MainCtrl">
         <div ng-repeat="field in slides track by $index">
             <div class="panel panel-default">
-                <div class="panel-heading">Slide</div>
+                <div class="panel-heading"></div>
                 <div class="panel-body">
                     <form action="{{ url_for('admin.slide_edit') }}" method="POST" role="form">
                         <input type="hidden" name="slide_id" ng-model="slides[$index].id">
@@ -50,6 +49,7 @@
         {% for message in get_flashed_messages() %}
             <div class="flash">{{ message }}</div>
         {% endfor %}
+        <h3>Add New Slide</h3>
         <form action="{{ url_for('admin.slide_edit') }}" method="POST" role="form">
             <input type="hidden" name="slide_id">
             <label for="fTitle">Title:</label>
