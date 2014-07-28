@@ -39,16 +39,17 @@ myApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
      */
     $scope.saveSlide = function(slide) {
         var SAVE_SLIDE_ENDPOINT = '/admin/slide/edit';
-        console.log("[DEBUG] getting here?");
-        console.log(slide);
         $http({
             method: 'POST',
             url: SAVE_SLIDE_ENDPOINT,
-            data: JSON.stringify({ 
-                'slide_id': slide.id
-            }),
+            data: { 
+                'slide_id': slide.id,
+                'title': slide.title,
+                'bg_image': slide.bg_image,
+                'bg_color': slide.bg_color,
+                'text': slide.text
+            },
             headers: {'Content-Type': 'application/json'}
-            
         })
         .success(function(data, status, headers, config) {
             if (data) {
