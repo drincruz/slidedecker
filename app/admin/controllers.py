@@ -72,10 +72,7 @@ def update_slide(slide_data):
     bg_color = slide_data['bg_color']
     text = slide_data['text']
 
-    slide = db.session.query(Slide).filter_by(id=slide_id)
-    #slide = Slide.query.get(id==slide_id)
-    print("[DEBUG] slide query %d" % slide_id)
-    print(slide)
+    slide = db.session.query(Slide).get(slide_id)
     if slide is None:
         return jsonify(
                 status='error',
