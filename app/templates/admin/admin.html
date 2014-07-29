@@ -44,11 +44,47 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
+            </div><!-- END div panel -->
+        </div><!-- END ng-repeat -->
         {% for message in get_flashed_messages() %}
             <div class="flash">{{ message }}</div>
         {% endfor %}
+        <div class="panel panel-default">
+            <div class="panel-heading">Add New Slide</div>
+            <div class="panel-body">
+                <form action="{{ url_for('admin.slide_edit') }}" method="POST" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fTitle">Title:</label>
+                        <div class="input-group col-sm-10">
+                            <input type="text" size="30" name="title" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fBgImg">Background Image:</label>
+                        <div class="input-group col-sm-10">
+                            <input type="text" size="30" name="bg-image" class="form-control" placeholder="URL">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fBgColor">Background Color:</label>
+                        <div class="input-group col-sm-10">
+                            <input type="text" size="30" name="bg-color" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fText">Text:</label>
+                        <div class="input-group col-sm-10">
+                            <textarea name="text" rows="5"cols="40" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="btn-group pull-right">
+                            <button type="submit" class="btn btn-default">Save</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div><!-- END div panel -->
         <h3>Add New Slide</h3>
         <form action="{{ url_for('admin.slide_edit') }}" method="POST" role="form">
             <input type="hidden" name="slide_id">
