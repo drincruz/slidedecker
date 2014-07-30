@@ -32,4 +32,33 @@ myApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
             console.log("[ERROR] " + data);
         });
     };
+
+    /**
+     * Save a slide
+     *
+     */
+    $scope.saveSlide = function(slide) {
+        var SAVE_SLIDE_ENDPOINT = '/admin/slide/edit';
+        $http({
+            method: 'POST',
+            url: SAVE_SLIDE_ENDPOINT,
+            data: { 
+                'slide_id': slide.id,
+                'title': slide.title,
+                'bg_image': slide.bg_image,
+                'bg_color': slide.bg_color,
+                'text': slide.text
+            },
+            headers: {'Content-Type': 'application/json'}
+        })
+        .success(function(data, status, headers, config) {
+            if (data) {
+                console.log(data);
+                $scope.slides = data.slides;
+            }
+        })
+        .error(function(data, status, headers, config) {
+            console.log("[ERROR] " + data);
+        });
+    };
 }]);
