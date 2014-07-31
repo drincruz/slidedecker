@@ -7,42 +7,41 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{% raw %}{{ slides[$index].title ? slides[$index].title : 'Slide ' + $index }}{% endraw %} </div>
                 <div class="panel-body">
-                    <form action="{{ url_for('admin.slide_edit') }}" method="POST" role="form">
-                        <input type="hidden" name="slide_id" ng-model="slides[$index].id">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="fTitle">Title:</label>
-                            <div class="input-group col-sm-10">
-                                <input type="text" size="30" name="title" class="form-control"
-                                    ng-model="slides[$index].title">
-                            </div>
+                    <input type="hidden" name="slide_id" ng-model="slides[$index].id">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fTitle">Title:</label>
+                        <div class="input-group col-sm-10">
+                            <input type="text" size="30" name="title" class="form-control"
+                                ng-model="slides[$index].title">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="fBgImg">Background Image:</label>
-                            <div class="input-group col-sm-10">
-                                <input type="text" size="30" name="bg-image" class="form-control" placeholder="URL"
-                                    ng-model="slides[$index].bg_image">
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fBgImg">Background Image:</label>
+                        <div class="input-group col-sm-10">
+                            <input type="text" size="30" name="bg-image" class="form-control" placeholder="URL"
+                                ng-model="slides[$index].bg_image">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="fBgColor">Background Color:</label>
-                            <div class="input-group col-sm-10">
-                                <input type="text" size="30" name="bg-color" class="form-control"
-                                    ng-model="slides[$index].bg_color">
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fBgColor">Background Color:</label>
+                        <div class="input-group col-sm-10">
+                            <input type="text" size="30" name="bg-color" class="form-control"
+                                ng-model="slides[$index].bg_color">
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="fText">Text:</label>
-                            <div class="input-group col-sm-10">
-                                <textarea name="text" rows="5"cols="40" class="form-control"
-                                    ng-model="slides[$index].text"></textarea>
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fText">Text:</label>
+                        <div class="input-group col-sm-10">
+                            <textarea name="text" rows="5"cols="40" class="form-control"
+                                ng-model="slides[$index].text"></textarea>
                         </div>
-                        <div class="form-group">
-                            <span class="btn-group pull-right">
-                                <button type="submit" class="btn btn-default">Save</button>
-                            </span>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="form-group">
+                        <span class="btn-group pull-right">
+                            <button type="submit" class="btn btn-default"
+                                ng-click="saveSlide(slides[$index]);">Save</button>
+                        </span>
+                    </div>
                 </div>
             </div><!-- END div panel -->
         </div><!-- END ng-repeat -->
