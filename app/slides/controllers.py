@@ -11,4 +11,10 @@ slides = Blueprint('slides', __name__, url_prefix='/slides')
 
 @slides.route('/')
 def slide_viewer():
-    return render_template("slides/slide.html")
+    """
+    Main slide viewer controller
+
+    """
+    # Get all slides from the database
+    slides = db.session().query(Slide).all()
+    return render_template("slides/slide.html", slides=slides)
