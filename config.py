@@ -27,4 +27,4 @@ CSRF_SESSION_KEY = "secret"
 SECRET_KEY = "secret"
 
 # Version Info
-VERSION = '0.3.2'
+VERSION = '0.3.3'
