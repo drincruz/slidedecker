@@ -12,6 +12,9 @@ myApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
     // Slides
     $scope.slides = [];
 
+    // New slide placeholder
+    $scope.newSlide = {};
+
     /**
      * Load any saved slides, if any
      *
