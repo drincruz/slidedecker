@@ -44,6 +44,7 @@ def add_slide(slide_data):
     Adds a slide to the database
 
     """
+    # TODO validate slide_data 
     title = slide_data['title']
     bg_image = slide_data['bg_image']
     bg_color = slide_data['bg_color']
