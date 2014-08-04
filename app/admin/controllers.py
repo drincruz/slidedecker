@@ -9,6 +9,9 @@ from flask import Blueprint, flash, jsonify, redirect, request, render_template,
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
+# Slide data keys 
+_SLIDE_KEYS = ['bg_color', 'bg_image', 'text', 'title']
+
 @admin.route('/')
 def admin_home():
     """
@@ -44,21 +47,35 @@ def add_slide(slide_data):
     Adds a slide to the database
 
     """
-    # TODO validate slide_data 
+    # Since we do not require any of the fields, we'll set them to None
+    for key in _SLIDE_KEYS:
+        if key not in slide_data:
+            slide_data[key] = None
     title = slide_data['title']
     bg_image = slide_data['bg_image']
     bg_color = slide_data['bg_color']
     text = slide_data['text']
 
     # Save the form data in the Slide object
-    slide = Slide(title, bg_image, bg_color, text)
+    slide = Slide(
+            slide_data['title'],
+            slide_data['bg_image'],
+            slide_data['bg_color'],
+            slide_data['text'])
 
     # Add the records in the database
     db.session.add(slide)
     db.session.commit()
 
-    flash('New slide was successfully posted')
-    return redirect(url_for('admin.admin_home'))
+    # Since we're sending back the slide_data, 
+    # let's update the object with it's new id
+    slide_data['id'] = slide.id
+
+    return jsonify(
+            status='success',
+            message='Successfully saved slide: {}'.format(slide.id),
+            slide_data=slide_data
+            )
 
 @admin.route('/update', methods=['POST'])
 def update_slide(slide_data):
@@ -66,14 +83,8 @@ def update_slide(slide_data):
     Update a slide entry
 
     """
-    slide_id = slide_data['slide_id']
 
-    title = slide_data['title']
-    bg_image = slide_data['bg_image']
-    bg_color = slide_data['bg_color']
-    text = slide_data['text']
-
-    slide = db.session.query(Slide).get(slide_id)
+    slide = db.session.query(Slide).get(slide_data['slide_id'])
     if slide is None:
         return jsonify(
                 status='error',
@@ -81,10 +92,10 @@ def update_slide(slide_data):
                 )
 
     # Update the record in the database
-    slide.title = title
-    slide.bg_image_uri = bg_image
-    slide.bg_color = bg_color
-    slide.text = text
+    slide.title = slide_data['title']
+    slide.bg_image_uri = slide_data['bg_image']
+    slide.bg_color = slide_data['bg_color']
+    slide.text = slide_data['text']
     db.session.commit()
 
     return jsonify(
@@ -102,7 +113,7 @@ def slide_edit():
         post = request.get_json()
     except:
         return jsonify(error='Expecting a JSON POST')
-        post['slide_id']
+    
     if 'slide_id' in post:
         return update_slide(post)
     else:
