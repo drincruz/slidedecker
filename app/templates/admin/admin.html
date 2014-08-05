@@ -48,8 +48,8 @@
 
         <!-- STATUS MESSAGES -->
         <div ng-show="msgShow"
-            ng-class="(msgClass == 'success') ? 'alert alert-success' : 'alert alert-danger'" role="alert"
-            ng-model="msgText">
+            ng-class="(msgClass == 'success') ? 'alert alert-success' : 'alert alert-danger'" role="alert">
+            {% raw %}{{ msgText }}{% endraw %}
         </div>
 
         <!-- ADD SLIDE -->
