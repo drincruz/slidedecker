@@ -12,6 +12,18 @@ myApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
     // Slides
     $scope.slides = [];
 
+    // New slide placeholder
+    $scope.newSlide = {};
+
+    // Message div class toggle
+    $scope.msgClass = 'success';
+
+    // Message div show toggle
+    $scope.msgShow = false;
+    
+    // Message div text
+    $scope.msgText = '';
+
     /**
      * Load any saved slides, if any
      *
@@ -53,8 +65,12 @@ myApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
         })
         .success(function(data, status, headers, config) {
             if (data) {
+                console.log("Inside saveSlide success ");
                 console.log(data);
-                $scope.slides = data.slides;
+                $scope.slides.push(data.slide_data);
+                $scope.msgClass = data.status;
+                $scope.msgText = data.message
+                $scope.msgShow = true;
             }
         })
         .error(function(data, status, headers, config) {
