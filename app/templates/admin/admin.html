@@ -4,7 +4,7 @@
 <div class="form-group" ng-app="myApp">
     <div ng-controller="MainCtrl">
         <div ng-repeat="field in slides track by $index">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">{% raw %}{{ slides[$index].title ? slides[$index].title : 'Slide ' + $index }}{% endraw %} </div>
                 <div class="panel-body">
                     <input type="hidden" name="slide_id" ng-model="slides[$index].id">
@@ -45,44 +45,52 @@
                 </div>
             </div><!-- END div panel -->
         </div><!-- END ng-repeat -->
-        {% for message in get_flashed_messages() %}
-            <div class="flash">{{ message }}</div>
-        {% endfor %}
-        <div class="panel panel-default">
+
+        <!-- STATUS MESSAGES -->
+        <div ng-show="msgShow"
+            ng-class="(msgClass == 'success') ? 'alert alert-success' : 'alert alert-danger'" role="alert">
+            {% raw %}{{ msgText }}{% endraw %}
+        </div>
+
+        <!-- ADD SLIDE -->
+        <div class="panel panel-info">
             <div class="panel-heading">Add New Slide</div>
             <div class="panel-body">
-                <form action="{{ url_for('admin.slide_edit') }}" method="POST" role="form">
-                    <input type="hidden" name="slide_id">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="fTitle">Title:</label>
-                        <div class="input-group col-sm-10">
-                            <input type="text" size="30" name="title" class="form-control">
-                        </div>
+                <input type="hidden" name="slide_id">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="fTitle">Title:</label>
+                    <div class="input-group col-sm-10">
+                        <input type="text" size="30" name="title" class="form-control"
+                            ng-model="newSlide.title">
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="fBgImg">Background Image:</label>
-                        <div class="input-group col-sm-10">
-                            <input type="text" size="30" name="bg-image" class="form-control" placeholder="URL">
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="fBgImg">Background Image:</label>
+                    <div class="input-group col-sm-10">
+                        <input type="text" size="30" name="bg-image" class="form-control" 
+                            placeholder="URL" ng-model="newSlide.bg_image">
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="fBgColor">Background Color:</label>
-                        <div class="input-group col-sm-10">
-                            <input type="text" size="30" name="bg-color" class="form-control">
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="fBgColor">Background Color:</label>
+                    <div class="input-group col-sm-10">
+                        <input type="text" size="30" name="bg-color" class="form-control"
+                            ng-model="newSlide.bg_color">
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="fText">Text:</label>
-                        <div class="input-group col-sm-10">
-                            <textarea name="text" rows="5"cols="40" class="form-control"></textarea>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="fText">Text:</label>
+                    <div class="input-group col-sm-10">
+                        <textarea name="text" rows="5"cols="40" class="form-control"
+                            ng-model="newSlide.text"></textarea>
                     </div>
-                    <div class="form-group">
-                        <span class="btn-group pull-right">
-                            <button type="submit" class="btn btn-default">Add</button>
-                        </span>
-                    </div>
-                </form>
+                </div>
+                <div class="form-group">
+                    <span class="btn-group pull-right">
+                        <button type="submit" class="btn btn-default"
+                            ng-click="saveSlide(newSlide);">Add</button>
+                    </span>
+                </div>
             </div>
         </div><!-- END div panel -->
     </div>
