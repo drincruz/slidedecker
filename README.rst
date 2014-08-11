@@ -26,3 +26,10 @@ Requirements Installation
 pip ::
 
     pip install -r requirements.txt
+
+Unit Tests
+--------
+
+nose ::
+
+    nosetests tests
