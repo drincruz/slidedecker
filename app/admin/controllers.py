@@ -118,3 +118,42 @@ def slide_edit():
         return update_slide(post)
     else:
         return add_slide(post)
+
+@admin.route('/slide/delete', methods=['POST'])
+def slide_delete():
+    """
+    Delete a slide
+
+    """
+    try:
+        post = request.get_json()
+    except:
+        return jsonify(error='Expecting a JSON POST')
+    
+    if 'slide_id' not in post:
+        return jsonify(
+                status='error',
+                message='Delete slide requires slide_id'
+                )
+
+def _delete_slide(slide_id):
+    """
+    Helper function to delete a slide in SQLAlchemy
+
+    """
+    db_session = db.session()
+    # Get the slide if it exists first
+    try:
+        slide = db_session.query(Slide).get(slide_id)
+    except Exception as ex:
+        return jsonify(
+                status='error',
+                message='Delete slide exception: {}'.format(ex.message)
+                )
+
+    # Delete the slide now
+    db_session.delete(slide)
+    return jsonify(
+            status='success',
+            message='Deleted slide successfully'
+            )
