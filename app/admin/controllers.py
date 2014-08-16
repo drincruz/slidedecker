@@ -100,7 +100,7 @@ def update_slide(slide_data):
 
     return jsonify(
             status='success',
-            message='Successfully saved slide: {}'.format(slide_id)
+            message='Successfully saved slide: {}'.format(slide_data['slide_id'])
             )
 
 @admin.route('/slide/edit', methods=['POST'])
