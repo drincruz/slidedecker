@@ -77,4 +77,32 @@ myApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
             console.log("[ERROR] " + data);
         });
     };
+
+    /**
+     * Delete a slide
+     *
+     */
+    $scope.deleteSlide = function(slide_id) {
+        var DEL_SLIDE_ENDPOINT = '/admin/slide/delete';
+        $http({
+            method: 'POST',
+            url: DEL_SLIDE_ENDPOINT,
+            data: { 
+                'slide_id': slide_id,
+            },
+            headers: {'Content-Type': 'application/json'}
+        })
+        .success(function(data, status, headers, config) {
+            if (data) {
+                console.log("Inside deleteSlide success ");
+                console.log(data);
+                $scope.msgClass = data.status;
+                $scope.msgText = data.message
+                $scope.msgShow = true;
+            }
+        })
+        .error(function(data, status, headers, config) {
+            console.log("[ERROR] " + data);
+        });
+    };
 }]);

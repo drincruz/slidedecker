@@ -8,7 +8,7 @@
                 <div class="panel-heading">
                     {% raw %}{{ slides[$index].title ? slides[$index].title : 'Slide ' + $index }}{% endraw %}
                     <div class="pull-right">
-                        <a ng-click="console.log('wat? ' +  $index);">
+                        <a ng-click="deleteSlide(slides[$index].id);">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
                     </div>

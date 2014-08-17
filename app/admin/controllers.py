@@ -135,6 +135,7 @@ def slide_delete():
                 status='error',
                 message='Delete slide requires slide_id'
                 )
+    return _delete_slide(post['slide_id'])
 
 def _delete_slide(slide_id):
     """
