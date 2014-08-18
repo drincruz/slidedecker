@@ -4,8 +4,15 @@
 <div class="form-group" ng-app="myApp">
     <div ng-controller="MainCtrl">
         <div ng-repeat="field in slides track by $index">
-            <div class="panel panel-primary">
-                <div class="panel-heading">{% raw %}{{ slides[$index].title ? slides[$index].title : 'Slide ' + $index }}{% endraw %} </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    {% raw %}{{ slides[$index].title ? slides[$index].title : 'Slide ' + $index }}{% endraw %}
+                    <div class="pull-right">
+                        <a ng-click="deleteSlide(slides[$index].id);">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <input type="hidden" name="slide_id" ng-model="slides[$index].id">
                     <div class="form-group">
@@ -53,7 +60,7 @@
         </div>
 
         <!-- ADD SLIDE -->
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading">Add New Slide</div>
             <div class="panel-body">
                 <input type="hidden" name="slide_id">
