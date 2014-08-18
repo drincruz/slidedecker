@@ -65,8 +65,6 @@ myApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
         })
         .success(function(data, status, headers, config) {
             if (data) {
-                console.log("Inside saveSlide success ");
-                console.log(data);
                 $scope.slides.push(data.slide_data);
                 $scope.msgClass = data.status;
                 $scope.msgText = data.message
@@ -82,7 +80,7 @@ myApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
      * Delete a slide
      *
      */
-    $scope.deleteSlide = function(slide_id) {
+    $scope.deleteSlide = function(slide_id, slide_index) {
         var DEL_SLIDE_ENDPOINT = '/admin/slide/delete';
         $http({
             method: 'POST',
@@ -94,10 +92,12 @@ myApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
         })
         .success(function(data, status, headers, config) {
             if (data) {
-                console.log("Inside deleteSlide success ");
-                console.log(data);
+                if ("success" === data.message) {
+                    // Delete the slide from the JS array
+                    $scope.slides.splice(slide_index, 1);
+                }
                 $scope.msgClass = data.status;
-                $scope.msgText = data.message
+                $scope.msgText = data.message;
                 $scope.msgShow = true;
             }
         })

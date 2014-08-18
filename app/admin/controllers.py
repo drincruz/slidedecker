@@ -154,6 +154,10 @@ def _delete_slide(slide_id):
 
     # Delete the slide now
     db_session.delete(slide)
+
+    # Commit
+    db_session.commit()
+
     return jsonify(
             status='success',
             message='Deleted slide successfully'
