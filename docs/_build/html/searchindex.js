@@ -1,0 +1,1 @@
+Search.setIndex({titleterms:{indic:0,tabl:0,welcom:0,slidedeck:0,document:0},terms:{modul:0,page:0,search:0,index:0,content:0},titles:["Welcome to slidedecker&#8217;s documentation!"],filenames:["index"],objects:{},objnames:{},envversion:43,objtypes:{}})
